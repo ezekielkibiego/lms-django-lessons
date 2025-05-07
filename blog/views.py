@@ -7,7 +7,7 @@ def blog(request):
     blogs = Blog.objects.all()
     ctx = {'blogs': blogs}
     
-    return render(request, 'blog_list.html', ctx)
+    return render(request, 'blogs/blog_list.html', ctx)
 
 def subscribe(request):
     if request.method == 'POST':
@@ -33,7 +33,7 @@ def add_blog(request):
     else:
         form = BlogForm()
             
-    return render(request, 'blog_form.html', {'form': form})
+    return render(request, 'blogs/blog_form.html', {'form': form})
         
 def update_blog(request, pk):
     blog = get_object_or_404(Blog, pk=pk)
@@ -42,7 +42,7 @@ def update_blog(request, pk):
         form.save()
         return redirect('blog')
     
-    return render(request, 'edit_blog.html', {'form': form})
+    return render(request, 'blos/edit_blog.html', {'form': form})
         
 def delete_blog(request, pk):
     blog = get_object_or_404(Blog, pk=pk)

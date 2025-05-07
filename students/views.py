@@ -11,4 +11,4 @@ def students_list(request):
     students = Student.objects.all()
     ctx = {'students': students}
     
-    return render(request, 'students_list.html', ctx)
+    return render(request, 'students/students_list.html', ctx)
