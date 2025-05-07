@@ -44,3 +44,8 @@ def update_blog(request, pk):
     
     return render(request, 'edit_blog.html', {'form': form})
         
+def delete_blog(request, pk):
+    blog = get_object_or_404(Blog, pk=pk)
+    blog.delete()
+    
+    return redirect('blog')
