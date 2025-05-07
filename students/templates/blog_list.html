@@ -19,6 +19,12 @@
                 </p>
                 <p class="text-sm text-gray-600">By {{ blog.author }} on {{ blog.date_posted }}</p>
                 <p class="text-sm text-gray-600">Last Updated: {{ blog.date_posted }}</p>
+
+                <div class="mt-4 flex space-x-4" >
+                    <a href="{% url 'update_blog' blog.id %}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-4 rounded">
+                        Edit
+                    </a>
+                </div>
             </div>
         {% endfor %}
     </div>

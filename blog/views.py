@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Subscriber, Blog
 from django.contrib import messages
 from .forms import BlogForm
@@ -34,4 +34,13 @@ def add_blog(request):
         form = BlogForm()
             
     return render(request, 'blog_form.html', {'form': form})
+        
+def update_blog(request, pk):
+    blog = get_object_or_404(Blog, pk=pk)
+    form = BlogForm(request.POST or None, instance=blog)
+    if form.is_valid():
+        form.save()
+        return redirect('blog')
+    
+    return render(request, 'edit_blog.html', {'form': form})
         
