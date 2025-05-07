@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Students List</h1>
+
+    <div class="overflow-x-auto">
+        <table class="min-w-full table-auto border border-gray-300 text-sm text-left text-gray-700 bg-white shadow rounded-lg">
+            <thead class="bg-gray-100 text-xs uppercase font-semibold border-b border-gray-300">
+                <tr>
+                    <th class="px-4 py-3 border border-gray-300">Student ID</th>
+                    <th class="px-4 py-3 border border-gray-300">First Name</th>
+                    <th class="px-4 py-3 border border-gray-300">Middle Name</th>
+                    <th class="px-4 py-3 border border-gray-300">Last Name</th>
+                    <th class="px-4 py-3 border border-gray-300">DOB</th>
+                    <th class="px-4 py-3 border border-gray-300">Gender</th>
+                    <th class="px-4 py-3 border border-gray-300">Email</th>
+                    <th class="px-4 py-3 border border-gray-300">Phone</th>
+                    <th class="px-4 py-3 border border-gray-300">Address</th>
+                    <th class="px-4 py-3 border border-gray-300">City</th>
+                    <th class="px-4 py-3 border border-gray-300">State</th>
+                    <th class="px-4 py-3 border border-gray-300">Postal</th>
+                    <th class="px-4 py-3 border border-gray-300">Country</th>
+                    <th class="px-4 py-3 border border-gray-300">Enrolled</th>
+                    <th class="px-4 py-3 border border-gray-300">Graduated</th>
+                    <th class="px-4 py-3 border border-gray-300">Major</th>
+                    <th class="px-4 py-3 border border-gray-300">GPA</th>
+                    <th class="px-4 py-3 border border-gray-300">Status</th>
+                    <th class="px-4 py-3 border border-gray-300">Emergency Name</th>
+                    <th class="px-4 py-3 border border-gray-300">Relationship</th>
+                    <th class="px-4 py-3 border border-gray-300">Emergency Phone</th>
+                    <th class="px-4 py-3 border border-gray-300">Image</th>
+                    <th class="px-4 py-3 border border-gray-300">Notes</th>
+                    <th class="px-4 py-3 border border-gray-300">Created</th>
+                    <th class="px-4 py-3 border border-gray-300">Updated</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                {% for student in students %}
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-3 border border-gray-300">{{ student.student_id }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.first_name }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.middle_name|default:"-" }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.last_name }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.date_of_birth }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.get_gender_display }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.email }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.phone_number }}</td>
+                    <td class="px-4 py-3 border border-gray-300">
+                        {{ student.address_line1 }}{% if student.address_line2 %}, {{ student.address_line2 }}{% endif %}
+                    </td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.city }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.state }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.postal_code }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.country }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.enrollment_date }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.graduation_date|default:"-" }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.major|default:"-" }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.gpa|default:"-" }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.get_status_display }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.emergency_contact_name }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.emergency_contact_relationship }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.emergency_contact_phone }}</td>
+                    <td class="px-4 py-3 border border-gray-300">
+                        {% if student.profile_image %}
+                        <img src="{{ student.profile_image.url }}" alt="Profile" class="h-10 w-10 rounded-full object-cover">
+                        {% else %}
+                        <span class="text-gray-400 italic">No Image</span>
+                        {% endif %}
+                    </td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.notes|default:"-" }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.created_at|date:"Y-m-d H:i" }}</td>
+                    <td class="px-4 py-3 border border-gray-300">{{ student.updated_at|date:"Y-m-d H:i" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

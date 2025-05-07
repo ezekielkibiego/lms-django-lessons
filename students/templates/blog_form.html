@@ -1,0 +1,41 @@
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Add Blog{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-100 py-10">
+  <h1 class="text-3xl font-semibold text-center text-gray-800 mb-6">Add New Blog Post</h1>
+  
+  <form method="post" class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+      {% csrf_token %}
+
+      <div class="mb-6">
+          <label for="{{ form.author.id_for_label }}" class="block text-gray-700 font-semibold mb-2">Author</label>
+          {{ form.author|add_class:"w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring focus:border-blue-300" }}
+      </div>
+
+      <div class="mb-6">
+          <label for="{{ form.title.id_for_label }}" class="block text-gray-700 font-semibold mb-2">Title</label>
+          {{ form.title|add_class:"w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring focus:border-blue-300" }}
+      </div>
+
+      <div class="mb-6">
+          <label for="{{ form.content.id_for_label }}" class="block text-gray-700 font-semibold mb-2">Content</label>
+          {{ form.content|add_class:"w-full border border-gray-300 rounded px-4 py-2 h-40 resize-y focus:outline-none focus:ring focus:border-blue-300" }}
+      </div>
+
+      <div class="mb-6">
+          <label for="{{ form.is_published.id_for_label }}" class="block text-gray-700 font-semibold mb-2">Publish</label>
+          {{ form.is_published }}
+      </div>
+
+      <div class="text-center">
+          <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded transition duration-200">
+              Save
+          </button>
+      </div>
+  </form>
+</div>
+{% endblock %}
