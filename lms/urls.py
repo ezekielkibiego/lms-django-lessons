@@ -16,11 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django_registration.backends.one_step.views import RegistrationView
+from students.views import CustomRegistrationView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('students.urls')),
     path('blog/', include('blog.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    
+    path('accounts/register/', CustomRegistrationView.as_view(), name='django_registration_register'),
+    path('accounts/', include('django_registration.backends.one_step.urls')),
     
 ]

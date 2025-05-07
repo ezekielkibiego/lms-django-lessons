@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Student
+from django_registration.backends.one_step.views import RegistrationView
+from django.urls import reverse_lazy
+
+class CustomRegistrationView(RegistrationView):
+    success_url = reverse_lazy('login')  
 
 def index(request):
 
