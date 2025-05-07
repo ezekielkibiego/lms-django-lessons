@@ -1,7 +1,53 @@
-<nav>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/blog/blogs">Blogs</a></li>
-        <li><a href="/students">Students</a></li>
-    </ul>
-</nav>
+
+<nav class="bg-gray-800 py-2">
+    <div class="container mx-auto px-4">
+      <div class="hidden md:flex items-center space-x-4">
+        <a href="/" class="py-2 px-3 text-gray-100 hover:text-white hover:bg-gray-700 rounded">Home</a>
+        <a href="{% url 'blog:blogs' %}" class="py-2 px-3 text-gray-100 hover:text-white hover:bg-gray-700 rounded">Blogs</a>
+        <a href="{% url 'blog:subscribe' %}" class="py-2 px-3 text-white bg-indigo-600 hover:bg-indigo-700 rounded">Subscribe</a>
+        {% if user.is_authenticated %}
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit" class="py-2 px-3 text-red-400 hover:text-red-300 hover:bg-gray-700 rounded">Logout</button>
+        </form>
+        {% endif %}
+      </div>
+      
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button type="button" class="mobile-menu-button text-gray-300 hover:text-white">
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile menu -->
+    <div class="hidden mobile-menu md:hidden">
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        <a href="/" class="block py-2 px-3 text-gray-100 hover:bg-gray-700 rounded">Home</a>
+        
+        <a href="{% url 'blog:blogs' %}" class="block py-2 px-3 text-gray-100 hover:bg-gray-700 rounded">Blogs</a>
+        <a href="{% url 'blog:subscribe' %}" class="block py-2 px-3 text-white bg-indigo-600 hover:bg-indigo-700 rounded">Subscribe</a>
+        {% if user.is_authenticated %}
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit" class="block w-full text-left py-2 px-3 text-red-400 hover:bg-gray-700 rounded">Logout</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Simple toggle script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.querySelector('.mobile-menu-button');
+      const menu = document.querySelector('.mobile-menu');
+      
+      btn.addEventListener('click', function() {
+        menu.classList.toggle('hidden');
+      });
+    });
+  </script>

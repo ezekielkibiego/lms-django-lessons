@@ -22,7 +22,7 @@ from students.views import CustomRegistrationView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('students.urls')),
-    path('blog/', include('blog.urls')),
+    path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
     path('accounts/', include('django.contrib.auth.urls')),
     
     path('accounts/register/', CustomRegistrationView.as_view(), name='django_registration_register'),

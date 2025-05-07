@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="max-w-md w-full bg-white p-6 rounded-lg shadow-lg text-center">
+    <h2 class="text-2xl font-bold mb-4">You have been logged out</h2>
+    <p class="mb-4">Thanks for visiting. You can <a href="{% url 'login' %}" class="text-blue-600 hover:underline">log in again</a>.</p>
+  </div>
+</div>
+{% endblock %}

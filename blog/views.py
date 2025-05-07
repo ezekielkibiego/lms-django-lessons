@@ -42,7 +42,7 @@ def update_blog(request, pk):
         form.save()
         return redirect('blog')
     
-    return render(request, 'blos/edit_blog.html', {'form': form})
+    return render(request, 'blogs/edit_blog.html', {'form': form})
         
 def delete_blog(request, pk):
     blog = get_object_or_404(Blog, pk=pk)
