@@ -3,7 +3,7 @@ from .models import Subscriber, Blog
 from django.contrib import messages
 from .forms import BlogForm
 
-def blog(request):
+def bloglist(request):
     blogs = Blog.objects.all()
     ctx = {'blogs': blogs}
     
@@ -18,7 +18,7 @@ def subscribe(request):
             subscriber = Subscriber(email=email)
             subscriber.save()
             messages.success(request, 'Thank you for subscribing for our weekly newsletters.')
-            return redirect('subscribe')
+            return redirect('blog:subscribe')
         
     return render(request, 'subscribe.html')
 
@@ -28,7 +28,7 @@ def add_blog(request):
         form = BlogForm(request.POST)
         if form.is_valid():
             blog = form.save()
-            return redirect('blog')
+            return redirect('blog:bloglist')
         
     else:
         form = BlogForm()
@@ -40,7 +40,7 @@ def update_blog(request, pk):
     form = BlogForm(request.POST or None, instance=blog)
     if form.is_valid():
         form.save()
-        return redirect('blog')
+        return redirect('blog:bloglist')
     
     return render(request, 'blogs/edit_blog.html', {'form': form})
         
@@ -48,4 +48,4 @@ def delete_blog(request, pk):
     blog = get_object_or_404(Blog, pk=pk)
     blog.delete()
     
-    return redirect('blog')
+    return redirect('blog:bloglist')
